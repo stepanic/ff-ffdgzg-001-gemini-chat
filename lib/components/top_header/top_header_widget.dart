@@ -58,45 +58,82 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                 22.0,
               ),
               12.0),
-          child: Container(
-            width: double.infinity,
-            height: 36.0,
-            decoration: const BoxDecoration(),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Text(
-                            'Gemini Assistant',
-                            style: FlutterFlowTheme.of(context)
-                                .bodyMedium
-                                .override(
-                                  fontFamily: 'Inter',
-                                  letterSpacing: 0.0,
-                                ),
-                          ),
-                        ],
-                      ),
-                    ],
+          child: SafeArea(
+            child: Container(
+              width: double.infinity,
+              height: 36.0,
+              decoration: const BoxDecoration(),
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Text(
+                              'Gemini Assistant',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Inter',
+                                    letterSpacing: 0.0,
+                                  ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Expanded(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Builder(
-                        builder: (context) => Padding(
+                  Expanded(
+                    child: Row(
+                      mainAxisSize: MainAxisSize.max,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Builder(
+                          builder: (context) => Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 6.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderRadius: 4.0,
+                              buttonSize: 36.0,
+                              fillColor: FlutterFlowTheme.of(context)
+                                  .primaryBackground,
+                              hoverColor: FlutterFlowTheme.of(context).slate50,
+                              hoverIconColor:
+                                  FlutterFlowTheme.of(context).primaryText,
+                              icon: Icon(
+                                Icons.key,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
+                                size: 18.0,
+                              ),
+                              onPressed: () async {
+                                await showDialog(
+                                  context: context,
+                                  builder: (dialogContext) {
+                                    return Dialog(
+                                      elevation: 0,
+                                      insetPadding: EdgeInsets.zero,
+                                      backgroundColor: Colors.transparent,
+                                      alignment: const AlignmentDirectional(0.0, 0.0)
+                                          .resolve(Directionality.of(context)),
+                                      child: const AddApiKeyWidget(),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 6.0, 0.0),
                           child: FlutterFlowIconButton(
+                            borderColor: Colors.transparent,
                             borderRadius: 4.0,
                             buttonSize: 36.0,
                             fillColor:
@@ -105,32 +142,23 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                             hoverIconColor:
                                 FlutterFlowTheme.of(context).primaryText,
                             icon: Icon(
-                              Icons.key,
+                              Icons.sunny_snowing,
                               color: FlutterFlowTheme.of(context).secondaryText,
                               size: 18.0,
                             ),
                             onPressed: () async {
-                              await showDialog(
-                                context: context,
-                                builder: (dialogContext) {
-                                  return Dialog(
-                                    elevation: 0,
-                                    insetPadding: EdgeInsets.zero,
-                                    backgroundColor: Colors.transparent,
-                                    alignment: const AlignmentDirectional(0.0, 0.0)
-                                        .resolve(Directionality.of(context)),
-                                    child: const AddApiKeyWidget(),
-                                  );
-                                },
-                              );
+                              if (Theme.of(context).brightness ==
+                                  Brightness.dark) {
+                                setDarkModeSetting(context, ThemeMode.light);
+                                return;
+                              } else {
+                                setDarkModeSetting(context, ThemeMode.dark);
+                                return;
+                              }
                             },
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 6.0, 0.0),
-                        child: FlutterFlowIconButton(
+                        FlutterFlowIconButton(
                           borderColor: Colors.transparent,
                           borderRadius: 4.0,
                           buttonSize: 36.0,
@@ -140,46 +168,21 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                           hoverIconColor:
                               FlutterFlowTheme.of(context).primaryText,
                           icon: Icon(
-                            Icons.sunny_snowing,
+                            FFIcons.krotateRefreshLoading3,
                             color: FlutterFlowTheme.of(context).secondaryText,
                             size: 18.0,
                           ),
                           onPressed: () async {
-                            if (Theme.of(context).brightness ==
-                                Brightness.dark) {
-                              setDarkModeSetting(context, ThemeMode.light);
-                              return;
-                            } else {
-                              setDarkModeSetting(context, ThemeMode.dark);
-                              return;
-                            }
+                            FFAppState().prompt = '';
+                            FFAppState().chat = [];
+                            FFAppState().update(() {});
                           },
                         ),
-                      ),
-                      FlutterFlowIconButton(
-                        borderColor: Colors.transparent,
-                        borderRadius: 4.0,
-                        buttonSize: 36.0,
-                        fillColor:
-                            FlutterFlowTheme.of(context).primaryBackground,
-                        hoverColor: FlutterFlowTheme.of(context).slate50,
-                        hoverIconColor:
-                            FlutterFlowTheme.of(context).primaryText,
-                        icon: Icon(
-                          FFIcons.krotateRefreshLoading3,
-                          color: FlutterFlowTheme.of(context).secondaryText,
-                          size: 18.0,
-                        ),
-                        onPressed: () async {
-                          FFAppState().prompt = '';
-                          FFAppState().chat = [];
-                          FFAppState().update(() {});
-                        },
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ].divide(const SizedBox(width: 12.0)),
+                ].divide(const SizedBox(width: 12.0)),
+              ),
             ),
           ),
         ),
