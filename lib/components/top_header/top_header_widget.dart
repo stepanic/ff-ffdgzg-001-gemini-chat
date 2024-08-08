@@ -75,7 +75,7 @@ class _TopHeaderWidgetState extends State<TopHeaderWidget> {
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Text(
-                              'Gemini Assistant',
+                              'FFDGZG Gemini Chat',
                               style: FlutterFlowTheme.of(context)
                                   .bodyMedium
                                   .override(

@@ -287,8 +287,6 @@ class _GeminiWidgetState extends State<GeminiWidget> {
                                                                       systemMessage:
                                                                           FFAppState()
                                                                               .systemMessage,
-                                                                      apiKey: FFAppState()
-                                                                          .geminiApiKey,
                                                                     );
                                                                     if (_model
                                                                             .response

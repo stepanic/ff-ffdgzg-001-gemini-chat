@@ -11,7 +11,7 @@ const _kPrivateApiFunctionName = 'ffPrivateApiCall';
 
 class GeminiCall {
   static Future<ApiCallResponse> call({
-    String? apiKey = '',
+    String? apiKey = 'AIzaSyARSNgsr8cuSd_4jP1IRTLZD4jiMWRRoAw',
     dynamic messagesJson,
     String? systemMessage = '',
   }) async {
